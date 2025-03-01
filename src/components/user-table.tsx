@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, ChevronDown, MoreVertical, Bell, UserPlus, Plus, X } from "lucide-react"
+import { Search, ChevronDown, MoreVertical, Bell, UserPlus, Plus } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -134,8 +134,6 @@ const users = [
   },
 ]
 
-const allRoles = ["Navigator", "Pilot", "Pathfinder", "Verified"]
-
 interface UserTableProps {
   activeFilters: string[]
   onFilterToggle: (role: string) => void
@@ -208,27 +206,27 @@ export function UserTable({ activeFilters, onFilterToggle }: UserTableProps) {
                 <ChevronDown className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 border-gray-700/50">
+            <DropdownMenuContent align="end" className="w-48 bg-[#1a1d29] border-gray-800/60 text-white shadow-lg">
               <DropdownMenuItem 
-                className="hover:bg-gray-700/80 focus:bg-gray-700/80 cursor-pointer"
+                className="hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 cursor-pointer text-gray-300 focus:text-white"
                 onClick={() => handleSort("name")}
               >
                 Name {sortField === "name" && (sortOrder === "asc" ? "↑" : "↓")}
               </DropdownMenuItem>
               <DropdownMenuItem 
-                className="hover:bg-gray-700/80 focus:bg-gray-700/80 cursor-pointer"
+                className="hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 cursor-pointer text-gray-300 focus:text-white"
                 onClick={() => handleSort("memberSince")}
               >
                 Member Since {sortField === "memberSince" && (sortOrder === "asc" ? "↑" : "↓")}
               </DropdownMenuItem>
               <DropdownMenuItem 
-                className="hover:bg-gray-700/80 focus:bg-gray-700/80 cursor-pointer"
+                className="hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 cursor-pointer text-gray-300 focus:text-white"
                 onClick={() => handleSort("joinedDiscord")}
               >
                 Joined Discord {sortField === "joinedDiscord" && (sortOrder === "asc" ? "↑" : "↓")}
               </DropdownMenuItem>
               <DropdownMenuItem 
-                className="hover:bg-gray-700/80 focus:bg-gray-700/80 cursor-pointer"
+                className="hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 cursor-pointer text-gray-300 focus:text-white"
                 onClick={() => handleSort("role")}
               >
                 Role {sortField === "role" && (sortOrder === "asc" ? "↑" : "↓")}
@@ -278,6 +276,7 @@ export function UserTable({ activeFilters, onFilterToggle }: UserTableProps) {
                         key={index}
                         variant="outline"
                         className="bg-[#12141e]/80 text-xs py-0.5 border-gray-700/50 hover:border-gray-600 text-white"
+                        onClick={() => onFilterToggle(role.name)}
                       >
                         <span className={`mr-1 ${getRoleDotColor(role.name)}`}>●</span> {role.name}
                       </Badge>
@@ -303,14 +302,14 @@ export function UserTable({ activeFilters, onFilterToggle }: UserTableProps) {
                           <MoreVertical className="h-4 w-4" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="border-gray-700/50">
-                        <DropdownMenuItem className="hover:bg-gray-700/80 focus:bg-gray-700/80">
+                      <DropdownMenuContent align="end" className="bg-[#1a1d29] border-gray-800/60 text-white shadow-lg">
+                        <DropdownMenuItem className="hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 text-gray-300 focus:text-white">
                           View Profile
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="hover:bg-gray-700/80 focus:bg-gray-700/80">
+                        <DropdownMenuItem className="hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 text-gray-300 focus:text-white">
                           Manage Roles
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="hover:bg-gray-700/80 focus:bg-gray-700/80">
+                        <DropdownMenuItem className="hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 text-gray-300 focus:text-white">
                           Send Message
                         </DropdownMenuItem>
                       </DropdownMenuContent>
@@ -330,17 +329,17 @@ export function UserTable({ activeFilters, onFilterToggle }: UserTableProps) {
             <SelectTrigger className="w-16 h-8 bg-[#0c0e14]/80 border-gray-700/50 focus:border-gray-600 text-white">
               <SelectValue placeholder="12" />
             </SelectTrigger>
-            <SelectContent className="border-gray-700/50">
-              <SelectItem value="12" className="hover:bg-gray-700/80 focus:bg-gray-700/80">
+            <SelectContent className="bg-[#1a1d29] border-gray-800/60 text-white shadow-lg">
+              <SelectItem value="12" className="hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 text-gray-300 focus:text-white">
                 12
               </SelectItem>
-              <SelectItem value="24" className="hover:bg-gray-700/80 focus:bg-gray-700/80">
+              <SelectItem value="24" className="hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 text-gray-300 focus:text-white">
                 24
               </SelectItem>
-              <SelectItem value="36" className="hover:bg-gray-700/80 focus:bg-gray-700/80">
+              <SelectItem value="36" className="hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 text-gray-300 focus:text-white">
                 36
               </SelectItem>
-              <SelectItem value="48" className="hover:bg-gray-700/80 focus:bg-gray-700/80">
+              <SelectItem value="48" className="hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 text-gray-300 focus:text-white">
                 48
               </SelectItem>
             </SelectContent>

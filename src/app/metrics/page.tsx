@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from "recharts"
-import { Users, UserCheck, Vote, UserPlus, Calendar, ArrowRight, TrendingUp, ChevronDown, ChevronUp } from "lucide-react"
+import { Users, UserCheck, Vote, UserPlus, Calendar, ChevronDown, ChevronUp, TrendingUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -83,12 +83,22 @@ const StatCard = ({ title, value, icon: Icon, change, trend }: StatCardProps) =>
 )
 
 // Custom tooltip component for charts
-const CustomTooltip = ({ active, payload, label }: any) => {
+interface TooltipProps {
+  active?: boolean;
+  payload?: Array<{
+    name: string;
+    value: number;
+    color: string;
+  }>;
+  label?: string;
+}
+
+const CustomTooltip = ({ active, payload, label }: TooltipProps) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-[#1a1d29] border border-gray-800/60 p-3 rounded-md shadow-lg">
         <p className="text-white font-medium mb-1">{label}</p>
-        {payload.map((entry: any, index: number) => (
+        {payload.map((entry, index) => (
           <div key={`item-${index}`} className="flex items-center gap-2 text-sm">
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: entry.color }}></div>
             <span className="text-gray-200">{entry.name}:</span>
@@ -173,12 +183,12 @@ export default function MetricsPage() {
                 <SelectTrigger className="w-[180px] bg-transparent border-0 focus:ring-0 shadow-none text-white">
                   <SelectValue placeholder="Select Range" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#1a1d29] border-gray-800/60">
+                <SelectContent className="bg-[#1a1d29] border-gray-800/60 text-white shadow-lg">
                   {dateRanges.map((range) => (
                     <SelectItem 
                       key={range.value} 
                       value={range.value}
-                      className="hover:bg-gray-800/40 focus:bg-gray-800/40 text-white"
+                      className="hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 text-gray-300 focus:text-white"
                     >
                       {range.label}
                     </SelectItem>
@@ -236,30 +246,30 @@ export default function MetricsPage() {
                       <TrendingUp className="h-4 w-4 mr-2" /> Customize
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="bg-[#1a1d29] border-gray-800/60">
+                  <DropdownMenuContent className="bg-[#1a1d29] border-gray-800/60 text-white shadow-lg">
                     <DropdownMenuItem 
-                      className={`flex items-center gap-2 hover:bg-gray-800/40 ${activeUserDataKeys.includes("total") ? "text-white" : "text-gray-300"}`}
+                      className={`flex items-center gap-2 hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 cursor-pointer ${activeUserDataKeys.includes("total") ? "text-white" : "text-gray-300"}`}
                       onClick={() => toggleDataSeries("total")}
                     >
                       <div className="w-2 h-2 rounded-full bg-[#8884d8]"></div>
                       Total Members
                     </DropdownMenuItem>
                     <DropdownMenuItem 
-                      className={`flex items-center gap-2 hover:bg-gray-800/40 ${activeUserDataKeys.includes("verified") ? "text-white" : "text-gray-300"}`}
+                      className={`flex items-center gap-2 hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 cursor-pointer ${activeUserDataKeys.includes("verified") ? "text-white" : "text-gray-300"}`}
                       onClick={() => toggleDataSeries("verified")}
                     >
                       <div className="w-2 h-2 rounded-full bg-[#82ca9d]"></div>
                       Verified Users
                     </DropdownMenuItem>
                     <DropdownMenuItem 
-                      className={`flex items-center gap-2 hover:bg-gray-800/40 ${activeUserDataKeys.includes("pilots") ? "text-white" : "text-gray-300"}`}
+                      className={`flex items-center gap-2 hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 cursor-pointer ${activeUserDataKeys.includes("pilots") ? "text-white" : "text-gray-300"}`}
                       onClick={() => toggleDataSeries("pilots")}
                     >
                       <div className="w-2 h-2 rounded-full bg-[#ffc658]"></div>
                       Pilots
                     </DropdownMenuItem>
                     <DropdownMenuItem 
-                      className={`flex items-center gap-2 hover:bg-gray-800/40 ${activeUserDataKeys.includes("newMembers") ? "text-white" : "text-gray-300"}`}
+                      className={`flex items-center gap-2 hover:bg-[#1e2235]/80 focus:bg-[#1e2235]/80 cursor-pointer ${activeUserDataKeys.includes("newMembers") ? "text-white" : "text-gray-300"}`}
                       onClick={() => toggleDataSeries("newMembers")}
                     >
                       <div className="w-2 h-2 rounded-full bg-[#ff7300]"></div>

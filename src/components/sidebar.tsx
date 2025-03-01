@@ -42,7 +42,7 @@ export function Sidebar() {
             <div key={role.id} className="flex items-center space-x-2">
               <Checkbox
                 id={role.id}
-                className="border-gray-700 data-[state=checked]:bg-gray-700 data-[state=checked]:text-white"
+                className="border-gray-800/60 data-[state=checked]:bg-[#1e2235] data-[state=checked]:text-white"
               />
               <Label htmlFor={role.id} className="text-sm cursor-pointer flex items-center gap-2">
                 <span className={`w-2 h-2 rounded-full ${role.color.split(" ")[0]}`}></span>
